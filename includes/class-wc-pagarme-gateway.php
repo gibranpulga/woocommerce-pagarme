@@ -370,6 +370,9 @@ class WC_Pagarme_Gateway extends WC_Payment_Gateway {
 		}
 
 		$installments = $this->api->get_installments( $cart_total );
+		
+		// Add filter for installments data (amount, installments)
+		$installments = apply_filters( 'wc_pagarme_installments_data', $installments );
 
 		if ( in_array( $this->methods, array( 'all', 'credit' ) ) ) {
 			include_once 'views/html-payment-form.php';
